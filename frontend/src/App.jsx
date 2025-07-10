@@ -7,6 +7,8 @@ import ListingPage1 from './pages/ListingPage1'
 import ListingPage2 from './pages/ListingPage2'
 import ListingPage3 from './pages/ListingPage3'
 import { userDataContext } from './Context/UserContext'
+import MyListing from './pages/MyListing'
+import ViewCard from './pages/ViewCard'
 
 
 function App() {
@@ -17,9 +19,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/listingpage1' element={userData!=null?<ListingPage1 />:<Navigate to={"/login"}/>} />
-        <Route path='/listingpage2' element={userData!=null?<ListingPage2 />:<Navigate to={"/login"}/>} />
-        <Route path='/listingpage3' element={userData!=null?<ListingPage3 />:<Navigate to={"/login"}/>} />
+        <Route path='/listingpage1' element={userData!=null?<ListingPage1 />:<Navigate to={"/"}/>} />
+        <Route path='/listingpage2' element={userData!=null?<ListingPage2 />:<Navigate to={"/"}/>} />
+        <Route path='/listingpage3' element={userData!=null?<ListingPage3 />:<Navigate to={"/"}/>} />
+        <Route path='/mylisting' element={userData!=null?<MyListing />:<Navigate to={"/"}/>} />
+
+        <Route path='/viewcard' element={userData!=null?<ViewCard />:<Navigate to={"/"}/>} />
 
       </Routes>
     </>

@@ -8,6 +8,7 @@ dotenv.config()
 import cors from "cors";
 import userRouter from "./routes/userRoute.js";
 import listingRouter from "./routes/listingRoute.js";
+import bookingRouter from "./routes/bookingRoute.js";
 
 let port = process.env.PORT || 6000;
 let app = express();
@@ -22,6 +23,8 @@ app.use(cors({
 app.use("/api/auth", authRouter)
 app.use("/api/user", userRouter)
 app.use("/api/listing", listingRouter)
+app.use("/api/booking", bookingRouter)
+
 
 
 

@@ -28,14 +28,14 @@ function ListingPage3() {
         <div className='w-[50px] h-[50px] bg-[red] cursor-pointer absolute top-[5%] left-[20px] rounded-[50%] flex items-center justify-center' onClick={() => navigate("/listingpage2")}><FaArrowLeftLong className="w-[25px] h-[25px] text-[white]" /></div>
 
         <div className='w-[95%] flex items-start justify-start text-[25px] md:w-[80%] mb-[10px]'>
-          <h1 className='text-[20px] text-[#272727] md:text-[30px] text-ellipsis text-nowrap overflow-hidden'>
+          <h1 className='text-[20px] text-[#272727] md:text-[30px] text-ellipsis text-nowrap overflow-hidden px-[70px] md:px-[0px]'>
             {`In ${landmark.toUpperCase()}, ${city.toUpperCase()}`}
           </h1>
 
         </div>
 
         <div className='w-[95%] h-[400px] flex items-center justify-center flex-col md:w-[80%] md:flex-row'>
-          <div className='w-[100%] h-[65%] md:w-[70%] md:h-[100%] overflow-hidden flex items-center justify-center border-[2px] border-[white] bg-[red]'>
+          <div className='w-[100%] h-[65%] md:w-[70%] md:h-[100%] overflow-hidden flex items-center justify-center border-[2px] border-[white] '>
             <img src={frontendImage1} alt='' className='w-[100%]' />
           </div>
 
@@ -57,7 +57,7 @@ function ListingPage3() {
 
 
          <div className='w-[95%] h-[50px] flex items-center justify-start px-[110px]'>
-          <button className='px-[50px] py-[10px] bg-[red] text-[white] text-[18px] md:px-[100px] rounded-lg' onClick={handleAddListing} disabled={adding}>{adding?"adding....":"Add Listing"}</button>
+          <button className='px-[30px] py-[10px] bg-[red] text-[white] text-[18px] md:px-[100px] rounded-lg text-nowrap' onClick={handleAddListing} disabled={adding}>{adding?"adding....":"Add Listing"}</button>
          </div>
 
       </div>
