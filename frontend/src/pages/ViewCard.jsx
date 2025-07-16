@@ -8,6 +8,7 @@ import { userDataContext } from '../Context/UserContext';
 import { authDataContext } from '../Context/AuthContext';
 import { FaStar } from "react-icons/fa";
 import { bookingDataContext } from '../Context/BookingContext';
+import { toast } from 'react-toastify';
 
 
 
@@ -35,7 +36,7 @@ function ViewCard() {
     let { checkIn, setCheckIn,
         checkOut, setCheckOut,
         total, setTotal,
-        night, setNight } = useContext(bookingDataContext)
+        night, setNight ,handleBooking,booking} = useContext(bookingDataContext)
 
 
     useEffect(() => {
@@ -70,18 +71,15 @@ function ViewCard() {
             formData.append("landmark", landmark)
 
 
-            ///////////////////////////
             let result = await axios.post(serverUrl + `/api/listing/update/${cardDetails._id}`, formData, { withCredentials: true });
             setUpdating(false)
 
             console.log(result);
+            toast.success("Listing Updated")
 
             navigate("/")
             // setTitle("")
             // setDescription("")
-            //   setFrontendImage1(null)
-            //   setFrontendImage2(null)
-            //   setFrontendImage3(null)
             // setBackendImage1(null)
             // setBackendImage2(null)
             // setBackendImage3(null)
@@ -90,7 +88,7 @@ function ViewCard() {
             // setLandmark("")
         } catch (error) {
             setUpdating(false)
-
+            toast.error(error.response.data.message)
             console.log(error);
         }
     }
@@ -104,10 +102,13 @@ function ViewCard() {
             console.log(result.data);
             setDeleting(false)
             navigate("/")
+            toast.success("Listing deleted")
 
         } catch (error) {
             setDeleting(false)
             console.log(error)
+           toast.error(error.response.data.message)
+
         }
     }
 
@@ -252,7 +253,9 @@ function ViewCard() {
 
                 <ImCross className='w-[30px] h-[30px] bg-[red] cursor-pointer absolute top-[6%] left-[25px] rounded-[50%] flex items-center justify-center' onClick={() => setUpdatePopUp(false)} />
 
-                <form className='max-w-[450px] w-[90%] h-[450px] overflow-auto  p-[20px] bg-[#f7fbfcfe] rounded-lg flex items-center justify-start flex-col gap-[10px] border-[1px] border-[#dedddd]'>
+                <form className='max-w-[450px] w-[90%] h-[450px] overflow-auto  p-[20px] bg-[#f7fbfcfe] rounded-lg flex items-center justify-start flex-col gap-[10px] border-[1px] border-[#dedddd]' onSubmit={(e)=>{
+                    e.preventDefault();
+                }}>
                     <h1 className='w-[100%] flex items-center justify-center py-[10px] text-[25px] border-b-[1px] border-[#a3a3a3]'>Confirm & Book</h1>
                     <div className='w-[100%] h-[70%]  mt-[10px] rounded-lg p-[10px] '>
                         <h3 className='text-[19px] font-semibold'>Your Trip -</h3>
@@ -271,7 +274,7 @@ function ViewCard() {
                         </div>
 
                         <div className='w-[100%] flex items-center justify-center'>
-                            <button className="px-[80px] py-[10px] bg-[red] text-[white] text-[15px] md:px-[100px] md:px-[100px] rounded-lg text-nowrap mt-[30px]">Book Now</button>
+                            <button className="px-[80px] py-[10px] bg-[red] text-[white] text-[15px] md:px-[100px] md:px-[100px] rounded-lg text-nowrap mt-[30px]" onClick={()=>handleBooking(cardDetails._id)} disabled={booking}>{booking?"Booking...":"Book now"}</button>
                         </div>
                     </div>
                 </form>
